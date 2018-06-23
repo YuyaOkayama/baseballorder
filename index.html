@@ -5,7 +5,7 @@
 		<h1>BaseballOrder</h1>
 	    <style>
 	      #canvas {
-	        background: #e0ffff;
+	        background: #000000;
 	      }
     	</style>
   </head>			
@@ -195,7 +195,7 @@
 				var position9 = document.forms.id_form1.position_9.value;																												
 
 				ctx.font = "40px Arial"; //フォントを指定
-				ctx.fillStyle = "black"; //塗り潰し色
+				ctx.fillStyle = "white"; //塗り潰し色
 				//ctx.fillText(txt,10,100,100); //テキストの最大幅を100pxに指定
 				//ctx.strokeStyle = "blue"; //輪郭線の色を青に
 				//ctx.strokeText(txt,10,150);     //テキスト輪郭を描画
@@ -264,8 +264,8 @@
 			}
 
 			function chgImg(){
-			  var png = canvas.toDataURL();
-			  document.getElementById("newImg").src = png;
+			  var jpeg = canvas.toDataURL("image/jpeg");
+			  document.getElementById("newImg").src = jpeg;
 			}
 		</script>
 		<form>
