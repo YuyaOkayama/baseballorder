@@ -1,16 +1,42 @@
 <!DOCTYPE = html>
 <html lang = "ja">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://yuyaokayama.github.io/BaseballOrder/" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<meta charset=utf-8>
+		<a href="pitcher/index.html">最強の起用法:投手版</a>	
 		<title>BaseballOrder</title>
-		<h1>BaseballOrder</h1>
+		<h1>俺が考えた最強のスタメン:野手</h1>
 	    <style>
 	      #canvas {
-	        background: #e0ffff;
+	        background: white;
 	      }
     	</style>
-  </head>			
-	</head>
+    	<Hr Size="1">
+    </head>			
 	<body>
+		<div>文字色
+			<form id="color">
+				<input name="color" type="radio" value="white" checked="checked"> 白
+				<input name="color" type="radio" value="black"> 黒
+				<input name="color" type="radio" value="red"> 赤
+				<input name="color" type="radio" value="blue"> 青
+				<input name="color" type="radio" value="yellow"> 黄
+				<input name="color" type="radio" value="orange"> 橙
+				<input name="color" type="radio" value="green"> 緑
+			</form>
+		</div>
+		<div>背景色
+			<form id="bcolor">
+				<input name="bcolor" type="radio" value="white"> 白
+				<input name="bcolor" type="radio" value="black" checked="checked"> 黒
+				<input name="bcolor" type="radio" value="red"> 赤
+				<input name="bcolor" type="radio" value="blue"> 青
+				<input name="bcolor" type="radio" value="yellow"> 黄
+				<input name="bcolor" type="radio" value="orange"> 橙
+				<input name="bcolor" type="radio" value="green"> 緑
+			</form>
+		</div>
 		<div>
 		<tr>
 			<form name="form1" id="id_form1" action="">
@@ -192,13 +218,21 @@
 
 				var num9 = "9."
 				var batter9 =document.forms.id_form1.batter_9.value;
-				var position9 = document.forms.id_form1.position_9.value;																												
+				var position9 = document.forms.id_form1.position_9.value;
+
+				var back = document.getElementById( "bcolor" ) ;
+				var backgroundcolor = back.bcolor;
+				var bc = backgroundcolor.value ;				
+
+				ctx.fillStyle = bc;//背景色
+				ctx.fillRect(0,0,320,480);//全体に反映
+
+				var element = document.getElementById( "color" ) ;
+				var radioNodeList = element.color;
+				var fs = radioNodeList.value ;
 
 				ctx.font = "40px Arial"; //フォントを指定
-				ctx.fillStyle = "black"; //塗り潰し色
-				//ctx.fillText(txt,10,100,100); //テキストの最大幅を100pxに指定
-				//ctx.strokeStyle = "blue"; //輪郭線の色を青に
-				//ctx.strokeText(txt,10,150);     //テキスト輪郭を描画
+				ctx.fillStyle = fs; //塗り潰し色
 				ctx.fillText(num1,10,50,100);      //テキストを塗り潰しで描画
 				ctx.strokeText(num1,10,50,100)
 				ctx.fillText(position1,50,50,100);
@@ -260,18 +294,21 @@
 				ctx.fillText(position9,50,450,100);
 				ctx.strokeText(position9,50,450,100);
 				ctx.fillText(batter9,150,450,100);
-				ctx.strokeText(batter9,150,450,100);																												
+				ctx.strokeText(batter9,150,450,100);
+
+				var jpeg = canvas.toDataURL("image/jpeg");
+			  　document.getElementById("newImg").src = jpeg;																												
 			}
 
-			function chgImg(){
-			  var png = canvas.toDataURL();
-			  document.getElementById("newImg").src = png;
-			}
 		</script>
-		<form>
-			<input type="button" value="画像に変換↓" onclick="chgImg()">
-		</form>
-		<div><img id="newImg"></div>		
+		<Hr Size="1">
+		<div>下の画像を保存して活用ください</div>
+		<div><img id="newImg"></div>
+		<a href="pitcher/index.html">最強の起用法:投手版へ</a>	
 	</body>
-
+	<footer>
+		<Hr Size="1">
+		<a href="https://twitter.com/yuyaokayama5516">お問い合わせ・ご要望はこちら（製作者Twitter：@YuyaOkayama5516）</a>
+  		<p><small>&copy; copyright 2018 YuyaOkayama</small></p>
+	</footer>
 </html>
