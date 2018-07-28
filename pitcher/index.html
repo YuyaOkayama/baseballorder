@@ -1,21 +1,30 @@
 <!DOCTYPE = html>
 <html lang = "ja">
 	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://yuyaokayama.github.io/BaseballOrder/" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 		<meta charset=utf-8>
-		<a href="../index.html">最強のスタメン:野手版</a>
 		<title>BaseballOrder</title>
-		<h1>俺が考えた最強の起用法:投手</h1>
+		<h1 class='phone_head'>俺が考えた最強の起用法<br>&nbsp;&nbsp;&nbsp;&nbsp;～投手編～</h1>
+		<h1 class='head'>俺が考えた最強の起用法：投手編</h1>
+		
+		<nav class="head_menu">
+			<li><a class="header_fielder" href="../index.html">野手版</a></li>
+			<li><a class="header_pitcher" href="index.html">投手版</a></li>
+			<li><a class="header_use" href="../howtouse/index.html">使い方</a></li>
+		</nav>
 	    <style>
 	      #canvas {
 	        background: white;
 	      }
-    	</style>
-    	<Hr Size="1">
+    	</style>    	
     </head>
     <body>
-    	<div>文字色
+    	<div class='colorconf'>
+    		<Hr Size="1">
+    		<p class='title'>文字色</p>
 			<form id="color">
 				<input name="color" type="radio" value="white" checked="checked"> 白
 				<input name="color" type="radio" value="black"> 黒
@@ -26,20 +35,22 @@
 				<input name="color" type="radio" value="green"> 緑
 			</form>
 		</div>
-		<div>背景色
+		<div class='colorconf'><p class='title'>背景色</p>
 			<form id="bcolor">
 				<input name="bcolor" type="radio" value="white"> 白
 				<input name="bcolor" type="radio" value="black" checked="checked"> 黒
 				<input name="bcolor" type="radio" value="red"> 赤
-				<input name="bcolor" type="radio" value="blue"> 青
+				<input name="bcolor" type="radio" valu&nbsp;&nbsp;e="blue"> 青
 				<input name="bcolor" type="radio" value="yellow"> 黄
 				<input name="bcolor" type="radio" value="orange"> 橙
 				<input name="bcolor" type="radio" value="green"> 緑
 			</form>
 		</div>
 		<tr>
-		<div>ローテーション
-			<form name="form1" id="id_form1" action="">
+		<div class='input'>
+			<form class="form" name="form1" id="id_form1" action="">
+			ローテーション
+			<br>
     		<td align="left"><b> 1.</b></td>
     		<td><input type="text" name="1" id="starter_1" size="15" maxlength="20"></td>
     		<td><select name="hand" id="hand_1">
@@ -126,7 +137,10 @@
 			</form>
 		</div>
 	</tr>
-
+		<div class="img">
+			<img id="newImg">
+			<input type="button" value="保存" class="save_button" onclick="saveCanvas('jpeg');" />
+		</div>
 		<canvas id="canvas" width="320" height="480"></canvas>
 		<script type="text/javascript">
 			function onButtonClick() {
@@ -248,15 +262,64 @@
 
 				var jpeg = canvas.toDataURL("image/jpeg");
 			  　document.getElementById("newImg").src = jpeg;
+
+			  	$('.save_button').css('display','block');
 			}
-    	</script>
-    	<Hr Size="1">
-		<div>下の画像を保存して活用ください</div>
-		<div><img id="newImg"></div>
-		<a href="../index.html">最強のスタメン:野手版へ</a>
+
+						// canvas上のイメージを保存
+				function saveCanvas(saveType, cvs, jpeg){
+				    
+				    var fileName = "order.jpeg";
+				    var base64 = canvas.toDataURL("image/jpeg");
+				    // base64データをblobに変換
+				    var blob = Base64toBlob(base64);
+				    // blobデータをa要素を使ってダウンロード
+				    saveBlob(blob, fileName);
+				}
+				 
+				// Base64データをBlobデータに変換
+				function Base64toBlob(base64)
+				{
+				    // カンマで分割して以下のようにデータを分ける
+				    // tmp[0] : データ形式（data:image/png;base64）
+				    // tmp[1] : base64データ（iVBORw0k～）
+				    var tmp = base64.split(',');
+				    // base64データの文字列をデコード
+				    var data = atob(tmp[1]);
+				    // tmp[0]の文字列（data:image/png;base64）からコンテンツタイプ（image/png）部分を取得
+					var mime = tmp[0].split(':')[1].split(';')[0];
+				    //  1文字ごとにUTF-16コードを表す 0から65535 の整数を取得
+					var buf = new Uint8Array(data.length);
+					for (var i = 0; i < data.length; i++) {
+				        buf[i] = data.charCodeAt(i);
+				    }
+				    // blobデータを作成
+					var blob = new Blob([buf], { type: mime });
+				    return blob;
+				}
+				 
+				// 画像のダウンロード
+				function saveBlob(blob, fileName)
+				{
+				    var url = (window.URL || window.webkitURL);
+				    // ダウンロード用のURL作成
+				    var dataUrl = url.createObjectURL(blob);
+				    // イベント作成
+				    var event = document.createEvent("MouseEvents");
+				    event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+				    // a要素を作成
+				    var a = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+				    // ダウンロード用のURLセット
+				    a.href = dataUrl;
+				    // ファイル名セット
+				    a.download = fileName;
+				    // イベントの発火
+				    a.dispatchEvent(event);
+				}
+    	</script>    	
     </body>	
-    	<footer>
-		<Hr Size="1">
+    <footer>
+    	<Hr Size="1">
 		<a href="https://twitter.com/yuyaokayama5516">お問い合わせ・ご要望はこちら（製作者Twitter：@YuyaOkayama5516）</a>
   		<p><small>&copy; copyright 2018 YuyaOkayama</small></p>
 	</footer>

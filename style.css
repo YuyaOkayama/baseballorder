@@ -1,0 +1,88 @@
+h1
+{
+	text-align: left;
+	font-size: 25;
+}
+
+.title
+{
+	font-weight: bold; 
+}
+
+.colorconf
+{
+	border-bottom: solid 1px gray;
+	clear: left;
+}
+
+.input
+{
+	padding-top: 10px;
+}
+
+canvas
+{
+	display: none;
+}
+
+.phone_head
+{
+	display: block;
+}
+
+.head
+{
+	display: none;
+}
+
+.save_button
+{
+	display: none;
+}
+
+nav>  li {
+	list-style: none;
+	float:left;
+	padding:10px 10px;
+	color:#ffffff;
+}
+
+
+
+.foot_use
+{
+	position: absolute;
+	bottom: 0;
+}
+
+@media screen and (min-width: 600px) {
+.phone_head{
+	display: none;
+	float: left;
+}
+.head
+{
+	display: block;
+}
+.form{
+		float: left;
+		padding-right: 20px;
+		font-size: none;
+	}
+.save_button
+{
+	float: left;
+	position: absolute;
+	bottom: 0px;
+	right: -50px;
+}
+.img
+{
+	float: left;
+	position: relative;
+}
+footer
+	{
+	clear: left;
+	}
+}
