@@ -24,26 +24,25 @@
 	<body>
 		<div class='colorconf'>
 			<Hr Size="1">
-			<p class='title'>文字色</p>
+			<p class='title'>チーム</p>
 			<form id="color">
-				<input name="color" type="radio" value="white" checked="checked"> 白
-				<input name="color" type="radio" value="black"> 黒
-				<input name="color" type="radio" value="red"> 赤
-				<input name="color" type="radio" value="blue"> 青
-				<input name="color" type="radio" value="yellow"> 黄
-				<input name="color" type="radio" value="orange"> 橙
-				<input name="color" type="radio" value="green"> 緑
-			</form>
-		</div>
-		<div class='colorconf'><p class='title'>背景色</p>
-			<form id="bcolor">
-				<input name="bcolor" type="radio" value="white"> 白
-				<input name="bcolor" type="radio" value="black" checked="checked"> 黒
-				<input name="bcolor" type="radio" value="red"> 赤
-				<input name="bcolor" type="radio" value="blue"> 青
-				<input name="bcolor" type="radio" value="yellow"> 黄
-				<input name="bcolor" type="radio" value="orange"> 橙
-				<input name="bcolor" type="radio" value="green"> 緑
+				<td>
+					<select name="color" id="cvscolor">
+						<option value="white,black"> </option>
+						<option value="#FFFFFF,#F97709">巨人</option>
+						<option value="#000000,#FFE201">阪神</option>
+						<option value="#FFFFFF,#FF2B06">広島</option>
+						<option value="#FFFFFF,#002569">中日</option>
+						<option value="#FFFFFF,#0055A5">横浜</optioon>
+						<option value="#0F1350,#00AB5C">ヤクルト</option>
+						<option value="#000000,#F5C700">ソフトバンク</option>
+						<option value="#E2D69E,#000019">オリックス</option>
+						<option value="#FFFFFF,#4C7B98">日本ハム</option>
+						<option value="#FFFFFF,#221815"> ロッテ</option>
+						<option value="#FFFFFF,#1F366A"> 西武</option>
+						<option value="#FFFFFF,#860010"> 楽天</option>
+					</select>
+				</td>
 			</form>
 		</div>
 		<div class='input'>
@@ -243,22 +242,16 @@
 				var batter9 =document.forms.id_form1.batter_9.value;
 				var position9 = document.forms.id_form1.position_9.value;
 
-				var back = document.getElementById( "bcolor" ) ;
-				var backgroundcolor = back.bcolor;
-				var bc = backgroundcolor.value ;				
-
+				var element = document.getElementById( "color" ) ;
+				var radioNodeList = element.color;
+				var bc = document.forms.color.cvscolor.value.split(',')[1];
 				ctx.fillStyle = bc;//背景色
 				ctx.fillRect(0,0,320,480);//全体に反映
 
-				var element = document.getElementById( "color" ) ;
-				var radioNodeList = element.color;
-				var fs = radioNodeList.value ;
-
+				var fs = document.forms.color.cvscolor.value.split(',')[0];
 				ctx.font = "40px Arial"; //フォントを指定
 				ctx.fillStyle = fs; //塗り潰し色
-				//ctx.fillText(txt,10,100,100); //テキストの最大幅を100pxに指定
-				//ctx.strokeStyle = "blue"; //輪郭線の色を青に
-				//ctx.strokeText(txt,10,150);     //テキスト輪郭を描画
+				
 				ctx.fillText(num1,10,50,100);      //テキストを塗り潰しで描画
 				ctx.strokeText(num1,10,50,100)
 				ctx.fillText(position1,50,50,100);
